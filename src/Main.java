@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-// TODO: add case sensitiveness
+// TODO: add case sensitiveness_
 // TODO: don't count same incorrect guess more than one
 // TODO: draw the actual hangman
 // TODO: restart game at the end
