@@ -45,7 +45,31 @@ public class Main {
         } else {
             System.out.println("Sorry, you have run out of guesses. It was " + wordToGuess);
         }
+        System.out.println("Do you want to continue?");     //dotaz jestli chces zacit znova
+
     }
+
+//    public static char scanContinue(Scanner scanner) {
+//
+//        while (true) {
+//            try {
+//                final String line = scanner.nextLine();
+//
+//                if (line.length() != 1) {
+//                    throw new Exception("Line length is not 1. Please enter a single letter");
+//                }
+//
+//                if (!Character.isLetter(line.charAt(0))) {
+//                    throw new Exception("Character is not a letter. Please enter a single letter");
+//                }
+//
+//                return line.charAt(0);
+//            } catch (Exception e) {
+//                System.out.println("Invalid input: " + e.getMessage());
+//            }
+//        }
+//    }
+//
 
     public static String revealLetters(String word, String hiddenWord, char letter) {
         // ak napriklad pride pismenko 'a', word je 'java', a hidden word je '____'
