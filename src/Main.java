@@ -56,8 +56,6 @@ public class Main {
             System.out.println("Přejete si zadat další příklad? [ano/ne]");
             pokracovat = scanner.nextLine();
         } while (pokracovat.equals("ano"));
-
-
     }
 
 //    public static char scanContinue(Scanner scanner) {
