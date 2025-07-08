@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -5,16 +7,14 @@ import java.util.Scanner;
 
 // TODO: don't count same incorrect guess more than one
 // TODO: draw the actual hangman
-// TODO: restart game at the end
+// TODO: restart game at the end - // DO - WHILE
 // TODO: add colors somehow (very optional)
 // TODO: add information about how many guesses left (Enter a letter (...))
-// TODO: show incorrect guesses (letters which user already tried)
+// TODO: show incorrect guesses (letters which user already tried) - // usedChar
 public class Main {
     public static void main(String[] args) {
         String pokracovat;
         do {
-
-
             final String[] words = {"java", "hangman", "skillmea", "academy", "computer"};
             final Random random = new Random();
             final String wordToGuess = selectRandomWord(random, words);
@@ -22,7 +22,15 @@ public class Main {
 
             final int MAX_INCORRECT_GUESSES = 6;
             int incorrectGuessesCounter = 0;
+            final int allreadyUse = 0;
+            List<String> usedChar = new ArrayList();
+            System.out.println(usedChar);
+
+
+
+
             final Scanner scanner = new Scanner(System.in);
+
 
             System.out.println("Welcome to Hangman");
             System.out.println("Guess the word: " + hiddenWord);
@@ -31,9 +39,13 @@ public class Main {
             while (incorrectGuessesCounter < MAX_INCORRECT_GUESSES && hiddenWord.contains("_")) {
                 System.out.println("Enter a letter ");
                 final char guess = scanLetter(scanner);
+                usedChar.add(String.valueOf(guess));
+                System.out.println("Tvoje pokusy " + usedChar);
+
+
 
                 if (hiddenWord.contains(String.valueOf(guess))) {
-                    System.out.println("This letter is already revealed");
+                    System.out.println("This letter is already revealed" + (usedChar));
                 } else if (wordToGuess.contains(String.valueOf(guess))) {
                     // revealnut letter / pismenko
                     hiddenWord = revealLetters(wordToGuess, hiddenWord, guess);
@@ -41,6 +53,7 @@ public class Main {
                 } else {
                     incorrectGuessesCounter++;
                     System.out.println("Incorrect guess, you have (" + (MAX_INCORRECT_GUESSES - incorrectGuessesCounter) + ") guesses left");
+                    System.out.println("Toto jsi uz uhod " + hiddenWord);
                 }
             }
 
@@ -52,8 +65,8 @@ public class Main {
             }
             System.out.println("Do you want to continue?");     //dotaz jestli chces zacit znova
 
-
-            System.out.println("Přejete si zadat další příklad? [ano/ne]");
+            System.out.println(usedChar);
+            System.out.println("Dalsi hra? [ano/ne]");
             pokracovat = scanner.nextLine();
         } while (pokracovat.equals("ano"));
     }
