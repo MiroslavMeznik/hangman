@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 // TODO: add case sensitiveness_
+
 // TODO: don't count same incorrect guess more than one
 // TODO: draw the actual hangman
 // TODO: restart game at the end
@@ -10,42 +11,52 @@ import java.util.Scanner;
 // TODO: show incorrect guesses (letters which user already tried)
 public class Main {
     public static void main(String[] args) {
-        final String[] words = {"java", "hangman", "skillmea", "academy", "computer"};
-        final Random random = new Random();
-        final String wordToGuess = selectRandomWord(random, words);
-        String hiddenWord = generateHiddenWord(wordToGuess);
+        String pokracovat;
+        do {
 
-        final int MAX_INCORRECT_GUESSES = 6;
-        int incorrectGuessesCounter = 0;
-        final Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to Hangman");
-        System.out.println("Guess the word: " + hiddenWord);
+            final String[] words = {"java", "hangman", "skillmea", "academy", "computer"};
+            final Random random = new Random();
+            final String wordToGuess = selectRandomWord(random, words);
+            String hiddenWord = generateHiddenWord(wordToGuess);
 
-        // continue cycle while there are guesses left and hiddenWord is still not solved
-        while (incorrectGuessesCounter < MAX_INCORRECT_GUESSES && hiddenWord.contains("_")) {
-            System.out.println("Enter a letter ");
-            final char guess = scanLetter(scanner);
+            final int MAX_INCORRECT_GUESSES = 6;
+            int incorrectGuessesCounter = 0;
+            final Scanner scanner = new Scanner(System.in);
 
-            if (hiddenWord.contains(String.valueOf(guess))) {
-                System.out.println("This letter is already revealed");
-            } else if (wordToGuess.contains(String.valueOf(guess))) {
-                // revealnut letter / pismenko
-                hiddenWord = revealLetters(wordToGuess, hiddenWord, guess);
-                System.out.println("Correct guess! Updated word: " + hiddenWord);
-            } else {
-                incorrectGuessesCounter++;
-                System.out.println("Incorrect guess, you have (" + (MAX_INCORRECT_GUESSES - incorrectGuessesCounter) + ") guesses left");
+            System.out.println("Welcome to Hangman");
+            System.out.println("Guess the word: " + hiddenWord);
+
+            // continue cycle while there are guesses left and hiddenWord is still not solved
+            while (incorrectGuessesCounter < MAX_INCORRECT_GUESSES && hiddenWord.contains("_")) {
+                System.out.println("Enter a letter ");
+                final char guess = scanLetter(scanner);
+
+                if (hiddenWord.contains(String.valueOf(guess))) {
+                    System.out.println("This letter is already revealed");
+                } else if (wordToGuess.contains(String.valueOf(guess))) {
+                    // revealnut letter / pismenko
+                    hiddenWord = revealLetters(wordToGuess, hiddenWord, guess);
+                    System.out.println("Correct guess! Updated word: " + hiddenWord);
+                } else {
+                    incorrectGuessesCounter++;
+                    System.out.println("Incorrect guess, you have (" + (MAX_INCORRECT_GUESSES - incorrectGuessesCounter) + ") guesses left");
+                }
             }
-        }
 
-        // tu mozem byt tak ze som to uhadol cele, alebo mi dosli guesses
-        if (!hiddenWord.contains("_")) {
-            System.out.println("Congratulations, you guessed it: " + wordToGuess);
-        } else {
-            System.out.println("Sorry, you have run out of guesses. It was " + wordToGuess);
-        }
-        System.out.println("Do you want to continue?");     //dotaz jestli chces zacit znova
+            // tu mozem byt tak ze som to uhadol cele, alebo mi dosli guesses
+            if (!hiddenWord.contains("_")) {
+                System.out.println("Congratulations, you guessed it: " + wordToGuess);
+            } else {
+                System.out.println("Sorry, you have run out of guesses. It was " + wordToGuess);
+            }
+            System.out.println("Do you want to continue?");     //dotaz jestli chces zacit znova
+
+
+            System.out.println("Přejete si zadat další příklad? [ano/ne]");
+            pokracovat = scanner.nextLine();
+        } while (pokracovat.equals("ano"));
+
 
     }
 
